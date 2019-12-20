@@ -11,6 +11,6 @@ data class RetornoLinha (
     val registros: kotlin.Int? = null,    
     val pagina: kotlin.Int? = null,    
     val qtdePagina: kotlin.Int? = null,    
-    val listaLinhas: kotlin.Array<Linha>? = null
+    val listaLinhas: List<Linha>? = null
 ) {
 }
