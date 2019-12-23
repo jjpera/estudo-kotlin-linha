@@ -6,6 +6,8 @@ import br.com.estudo.kotlin.linha.model.RetornoHistorico
 import br.com.estudo.kotlin.linha.model.Historico
 import br.com.estudo.kotlin.linha.repository.LinhaRepository
 import org.springframework.stereotype.Service
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 
 @Service
 class LinhaService(private val linhaRepository: LinhaRepository) {
@@ -15,17 +17,18 @@ class LinhaService(private val linhaRepository: LinhaRepository) {
 
         linhaRepository.save(linha)
 
-        retornoLinha = defaultRetornoLinha(1, listOf(linha))
+        retornoLinha = defaultRetornoLinha(registros = 1, linhas = listOf(linha))
 
         return retornoLinha
     }
 
-    fun find(ddd: String, numero: String, pagina: Integer, qtdePagina: Integer): RetornoLinha {
+    fun find(ddd: String?, numero: String?, pagina: Int, qtdePagina: Int): RetornoLinha {
         var retornoLinha: RetornoLinha
 
-        val listaLinha = linhaRepository.findAll()
+        val page = PageRequest.of(pagina, qtdePagina, Sort.Direction.DESC, "ddd")
+        val listaLinha = linhaRepository.findFilter(ddd, numero, page)
 
-        retornoLinha = defaultRetornoLinha(listaLinha.size, listaLinha)
+        retornoLinha = defaultRetornoLinha(linhaRepository.count(ddd, numero), listaLinha)
 
         return retornoLinha
     }
@@ -66,7 +69,7 @@ class LinhaService(private val linhaRepository: LinhaRepository) {
         return retornoLinha
     }
 
-    fun defaultRetornoLinha(registros: Int, linhas: List<Linha>): RetornoLinha {
+    fun defaultRetornoLinha(registros: Int, linhas: List<Linha>, pagina: Int? = 0, qtdePagina: Int? = 0): RetornoLinha {
         return RetornoLinha(
             codigo = 0,
             descricao = "success",

@@ -11,16 +11,16 @@ import br.com.estudo.kotlin.linha.model.*
 class LinhaController(private val linhaService: LinhaService) {
 
 	@PostMapping("/linha")
-	fun cadastrarLinha(@RequestBody body: Linha): RetornoLinha {
-        return linhaService.insert(body)
+	fun cadastrarLinha(@RequestBody body: Linha): ResponseEntity<RetornoLinha> {
+        return ResponseEntity.ok(linhaService.insert(body))
     }
 
 	@GetMapping("/linha")
 	fun buscarLinha(
-			@RequestParam(value = "ddd") ddd: String,
-			@RequestParam(value = "numero") numero: String,
-			@RequestParam(value = "pagina") pagina: Integer,
-			@RequestParam(value = "qtdePagina") qtdePagina: Integer): ResponseEntity<RetornoLinha> {
+			@RequestParam(value = "ddd") ddd: String?,
+			@RequestParam(value = "numero") numero: String?,
+			@RequestParam(value = "pagina") pagina: Int,
+			@RequestParam(value = "qtdePagina") qtdePagina: Int): ResponseEntity<RetornoLinha> {
         return return ResponseEntity.ok(linhaService.find(ddd, numero, pagina, qtdePagina))
     }
 

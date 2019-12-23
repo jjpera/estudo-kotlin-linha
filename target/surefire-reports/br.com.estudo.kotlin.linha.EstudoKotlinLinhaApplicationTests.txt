@@ -1,4 +1,11 @@
 -------------------------------------------------------------------------------
 Test set: br.com.estudo.kotlin.linha.EstudoKotlinLinhaApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.56 s - in br.com.estudo.kotlin.linha.EstudoKotlinLinhaApplicationTests
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 4.423 s <<< FAILURE! - in br.com.estudo.kotlin.linha.EstudoKotlinLinhaApplicationTests
+contextLoads  Time elapsed: 0.003 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'linhaController' defined in file [/workspace/estudo-kotlin-linha/target/classes/br/com/estudo/kotlin/linha/api/LinhaController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'linhaService' defined in file [/workspace/estudo-kotlin-linha/target/classes/br/com/estudo/kotlin/linha/service/LinhaService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'linhaRepository': Invocation of init method failed; nested exception is org.springframework.data.mapping.PropertyReferenceException: No property findFilter found for type Linha!
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'linhaService' defined in file [/workspace/estudo-kotlin-linha/target/classes/br/com/estudo/kotlin/linha/service/LinhaService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'linhaRepository': Invocation of init method failed; nested exception is org.springframework.data.mapping.PropertyReferenceException: No property findFilter found for type Linha!
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'linhaRepository': Invocation of init method failed; nested exception is org.springframework.data.mapping.PropertyReferenceException: No property findFilter found for type Linha!
+Caused by: org.springframework.data.mapping.PropertyReferenceException: No property findFilter found for type Linha!
+
