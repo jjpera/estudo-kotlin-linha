@@ -5,5 +5,5 @@ import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.data.domain.Pageable
 
 interface LinhaRepository:MongoRepository<Linha,String>{
-	fun find(ddd: String?, numero: String?, pageable: Pageable): List<Linha>
+	//fun find(ddd: String?, numero: String?, pageable: Pageable): List<Linha>
 }
