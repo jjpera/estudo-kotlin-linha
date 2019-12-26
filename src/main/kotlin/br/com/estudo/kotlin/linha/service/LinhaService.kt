@@ -37,6 +37,12 @@ class LinhaService(private val linhaRepository: LinhaRepository, private val his
         val page = PageRequest.of(pagina, qtdePagina, Sort.Direction.DESC, "ddd")
         val listaLinha = linhaRepository.findFilter(ddd, numero, page)
 
+        historicoService.insert(Historico(
+            tipo = TipoHistorico.get,
+            sistema = Sistema.linha,
+            descricao = "ddd: " + ddd + " numero: " + numero
+        ))
+
         retornoLinha = defaultRetornoLinha(linhaRepository.count(ddd, numero), listaLinha)
 
         return retornoLinha
@@ -47,7 +53,13 @@ class LinhaService(private val linhaRepository: LinhaRepository, private val his
 
         if (linhaRepository.existsById(codigo)) {
             linhaRepository.save(linha)
-            
+
+            historicoService.insert(Historico(
+                tipo = TipoHistorico.put,
+                sistema = Sistema.linha,
+                descricao = "ddd: " + linha.ddd + " numero: " + linha.numero
+            ))
+
             retornoLinha = defaultRetornoLinha(1, listOf(linha))
 
         } else {
@@ -66,6 +78,12 @@ class LinhaService(private val linhaRepository: LinhaRepository, private val his
         if (linhaRepository.existsById(codigo)) {
             val linha = linhaRepository.findById(codigo).orElse(null)
             linhaRepository.delete(linha)
+
+            historicoService.insert(Historico(
+                tipo = TipoHistorico.delete,
+                sistema = Sistema.linha,
+                descricao = "ddd: " + linha.ddd + " numero: " + linha.numero
+            ))
 
             retornoLinha = defaultRetornoLinha(1, listOf(linha))
         } else {

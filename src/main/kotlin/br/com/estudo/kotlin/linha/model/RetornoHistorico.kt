@@ -6,11 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class RetornoHistorico (
-    val codigo: kotlin.Long? = null,    
-    val descricao: kotlin.String? = null,    
-    val registros: kotlin.Int? = null,    
-    val pagina: kotlin.Int? = null,    
-    val qtdePagina: kotlin.Int? = null,    
-    val listaHistoricos: kotlin.Array<Historico>? = null
+    val codigo: Long? = null,    
+    val descricao: String? = null,    
+    val registros: Int? = null,    
+    val pagina: Int? = null,    
+    val qtdePagina: Int? = null,    
+    val listaHistoricos: Array<Historico>? = null
 ) {
 }
