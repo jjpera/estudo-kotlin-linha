@@ -2,9 +2,9 @@ package br.com.estudo.kotlin.linha.model
 
 import br.com.estudo.kotlin.linha.model.Historico
 import br.com.estudo.kotlin.linha.model.Retorno
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
-/**
- *  * @param listaHistoricos */
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class RetornoHistorico (
     val codigo: kotlin.Long? = null,    
     val descricao: kotlin.String? = null,    

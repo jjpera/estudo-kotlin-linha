@@ -4,18 +4,27 @@ import br.com.estudo.kotlin.linha.model.RetornoLinha
 import br.com.estudo.kotlin.linha.model.Linha
 import br.com.estudo.kotlin.linha.model.RetornoHistorico
 import br.com.estudo.kotlin.linha.model.Historico
+import br.com.estudo.kotlin.linha.enums.Sistema
+import br.com.estudo.kotlin.linha.enums.TipoHistorico
 import br.com.estudo.kotlin.linha.repository.LinhaRepository
+import br.com.estudo.kotlin.linha.service.HistoricoService
 import org.springframework.stereotype.Service
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 
 @Service
-class LinhaService(private val linhaRepository: LinhaRepository) {
+class LinhaService(private val linhaRepository: LinhaRepository, private val historicoService: HistoricoService) {
 
     fun insert(linha: Linha): RetornoLinha {
         var retornoLinha: RetornoLinha
 
         linhaRepository.save(linha)
+
+        historicoService.insert(Historico(
+            tipo = TipoHistorico.post,
+            sistema = Sistema.linha,
+            descricao = "ddd: " + linha.ddd + " numero: " + linha.numero
+        ))
 
         retornoLinha = defaultRetornoLinha(registros = 1, linhas = listOf(linha))
 
