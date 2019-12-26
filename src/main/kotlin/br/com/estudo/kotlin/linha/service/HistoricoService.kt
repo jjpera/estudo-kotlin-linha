@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate
 class HistoricoService {
 
     fun insert(historico: Historico): RetornoHistorico? {
-        val retornoHistorico = RestTemplate().postForObject("https:localhost:8081/historico/historico", historico, RetornoHistorico::class.java)
+        val retornoHistorico = RestTemplate().postForObject("http://localhost:8081/historico/historico", historico, RetornoHistorico::class.java)
 
         return retornoHistorico
     }

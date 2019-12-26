@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Historico (
-    val id: Long? = null,
+    val id: String? = null,
     val `data`: java.time.LocalDateTime? = null,
     val tipo: TipoHistorico? = null,
     val sistema: Sistema? = null,
