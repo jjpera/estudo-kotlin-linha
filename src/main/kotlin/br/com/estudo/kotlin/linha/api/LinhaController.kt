@@ -7,7 +7,6 @@ import br.com.estudo.kotlin.linha.service.LinhaService
 import br.com.estudo.kotlin.linha.model.*
 
 @Controller
-//@RequestMapping("/linhas")
 class LinhaController(private val linhaService: LinhaService) {
 
 	@PostMapping("/linha")
@@ -21,18 +20,18 @@ class LinhaController(private val linhaService: LinhaService) {
 			@RequestParam(value = "numero") numero: String?,
 			@RequestParam(value = "pagina") pagina: Int,
 			@RequestParam(value = "qtdePagina") qtdePagina: Int): ResponseEntity<RetornoLinha> {
-        return return ResponseEntity.ok(linhaService.find(ddd, numero, pagina, qtdePagina))
+        return ResponseEntity.ok(linhaService.find(ddd, numero, pagina, qtdePagina))
     }
 
     @PutMapping("/linha/{codigo}")
     fun alterarLinha(
             @PathVariable codigo: String, 
-            @RequestBody body: Linha): RetornoLinha {
-        return linhaService.update(codigo, body)
+            @RequestBody body: Linha): ResponseEntity<RetornoLinha> {
+        return ResponseEntity.ok(linhaService.update(codigo, body))
     }
 
 	@DeleteMapping("/linha/{codigo}")
-	fun excluirLinha(@PathVariable codigo: String): RetornoLinha {
-        return linhaService.delete(codigo)
+	fun excluirLinha(@PathVariable codigo: String): ResponseEntity<RetornoLinha> {
+        return ResponseEntity.ok(linhaService.delete(codigo))
     }
 }
